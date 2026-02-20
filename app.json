@@ -1,0 +1,39 @@
+{
+  "expo": {
+    "name": "Obzzerve",
+    "slug": "obzzerve",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "icon": "./assets/icon.png",
+    "backgroundColor": "#FFE066",
+    "userInterfaceStyle": "light",
+    "splash": {
+  "image": "./assets/icon.png",
+  "resizeMode": "contain",
+  "backgroundColor": "#FFE066"
+},
+    "android": {
+      "package": "com.buzzy.obzzerve",
+      "adaptiveIcon": {
+        "foregroundImage": "./assets/adaptive-icon.png",
+        "backgroundColor": "#FFE066"
+      },
+      "permissions": [
+        "android.permission.RECORD_AUDIO"
+      ]
+    },
+    "plugins": [
+      [
+        "expo-image-picker",
+        {
+          "photosPermission": "Appen behöver tillgång till dina foton för att spara observationer."
+        }
+      ]
+    ],
+    "extra": {
+      "eas": {
+        "projectId": "0f44b5e4-ff5c-4c9c-b501-97e71f99375a"
+      }
+    }
+  }
+}
