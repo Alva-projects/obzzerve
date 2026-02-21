@@ -8,19 +8,17 @@
     "backgroundColor": "#FFE066",
     "userInterfaceStyle": "light",
     "splash": {
-  "image": "./assets/icon.png",
-  "resizeMode": "contain",
-  "backgroundColor": "#FFE066"
-},
+      "image": "./assets/icon.png",
+      "resizeMode": "contain",
+      "backgroundColor": "#FFE066"
+    },
     "android": {
       "package": "com.buzzy.obzzerve",
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#FFE066"
       },
-      "permissions": [
-        "android.permission.RECORD_AUDIO"
-      ]
+      "permissions": ["android.permission.RECORD_AUDIO"]
     },
     "plugins": [
       [
@@ -28,7 +26,8 @@
         {
           "photosPermission": "Appen behöver tillgång till dina foton för att spara observationer."
         }
-      ]
+      ],
+      "expo-file-system"
     ],
     "extra": {
       "eas": {
