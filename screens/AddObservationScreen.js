@@ -206,7 +206,7 @@ const AddObservationScreen = ({ navigation, route }) => {
         </TouchableOpacity>
 
         <View style={styles.formContainer}>
-          <Text style={styles.label}>🌸 Vad hittade du? *</Text>
+          <Text style={styles.label}>Vad hittade du? *</Text>
           <TextInput
             style={styles.input}
             placeholder="T.ex. Maskros, Rödhake, Blåsippa"
@@ -217,7 +217,7 @@ const AddObservationScreen = ({ navigation, route }) => {
             autoCapitalize="words"
           />
 
-          <Text style={styles.label}>🌺 Vilken årstid? *</Text>
+          <Text style={styles.label}>Vilken årstid? *</Text>
           <View style={styles.seasonContainer}>
             {["Vår", "Sommar", "Höst", "Vinter"].map((s) => (
               <TouchableOpacity
@@ -230,7 +230,7 @@ const AddObservationScreen = ({ navigation, route }) => {
               >
                 <Text style={styles.seasonButtonEmoji}>
                   {s === "Vår"
-                    ? "🌸"
+                    ? "🌼"
                     : s === "Sommar"
                       ? "☀️"
                       : s === "Höst"
@@ -368,12 +368,12 @@ const AddObservationScreen = ({ navigation, route }) => {
               <Text style={styles.sublabel}>↳ Vilken typ av svamp?</Text>
               <View style={styles.subcategoryRow}>
                 {[
-                  { key: "Skivlingar", emoji: "🍄" },
-                  { key: "Soppar", emoji: "🍄" },
-                  { key: "Tickor", emoji: "🍄" },
-                  { key: "Taggsvampar", emoji: "🍄" },
-                  { key: "Buksvampar", emoji: "🍄" },
-                  { key: "Murklor", emoji: "🍄" },
+                  { key: "Skivlingar", emoji: "" },
+                  { key: "Soppar", emoji: "" },
+                  { key: "Tickor", emoji: "" },
+                  { key: "Taggsvampar", emoji: "" },
+                  { key: "Buksvampar", emoji: "" },
+                  { key: "Murklor", emoji: "" },
                   { key: "Vet inte", emoji: "❓" },
                 ].map(({ key, emoji }) => (
                   <TouchableOpacity

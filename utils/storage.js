@@ -47,13 +47,17 @@ const uploadImage = async (imageUri, userId) => {
 
     console.log("Blob created, size:", blob.size, "type:", blob.type);
 
+    // Konvertera blob till ArrayBuffer (funkar bättre med Supabase)
+    const arrayBuffer = await blob.arrayBuffer();
+    console.log("ArrayBuffer created, byteLength:", arrayBuffer.byteLength);
+
     const fileName = `${userId}/${Date.now()}.jpg`;
 
     console.log("Uploading to:", fileName);
 
     const { data, error } = await supabase.storage
       .from("observations")
-      .upload(fileName, blob, {
+      .upload(fileName, arrayBuffer, {
         contentType: "image/jpeg",
         upsert: false,
       });
