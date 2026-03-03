@@ -4,10 +4,46 @@ import { supabase } from "../config/supabase";
 const uploadImage = async (imageUri, userId) => {
   try {
     console.log("Starting upload for:", imageUri);
+    console.log("User ID:", userId);
 
-    // Fetch bilden som blob (funkar på både web och mobil!)
-    const response = await fetch(imageUri);
-    const blob = await response.blob();
+    // Testa Supabase-anslutning först
+    const { data: testData, error: testError } = await supabase
+      .from("observations")
+      .select("id")
+      .limit(1);
+
+    console.log("Supabase connection test:", testError ? "FAILED" : "SUCCESS");
+    if (testError) {
+      throw new Error("Supabase connection failed: " + testError.message);
+    }
+
+    // Konvertera bild till blob - olika metoder för web vs mobil
+    let blob;
+
+    if (imageUri.startsWith("file://")) {
+      // Android: Använd XMLHttpRequest
+      console.log("Using XHR for Android file:// URI");
+      blob = await new Promise((resolve, reject) => {
+        const xhr = new XMLHttpRequest();
+        xhr.onload = function () {
+          resolve(xhr.response);
+        };
+        xhr.onerror = function () {
+          reject(new Error("XHR failed to read file"));
+        };
+        xhr.responseType = "blob";
+        xhr.open("GET", imageUri, true);
+        xhr.send(null);
+      });
+    } else {
+      // Web: Standard fetch
+      console.log("Using fetch for web blob:// URI");
+      const response = await fetch(imageUri);
+      if (!response.ok) {
+        throw new Error("Failed to fetch image: " + response.status);
+      }
+      blob = await response.blob();
+    }
 
     console.log("Blob created, size:", blob.size, "type:", blob.type);
 
@@ -24,7 +60,7 @@ const uploadImage = async (imageUri, userId) => {
 
     if (error) {
       console.error("Upload error:", error);
-      throw new Error("Supabase: " + error.message);
+      throw new Error("Supabase Storage: " + error.message);
     }
 
     const {
