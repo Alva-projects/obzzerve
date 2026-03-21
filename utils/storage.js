@@ -20,9 +20,10 @@ const uploadImage = async (imageUri, userId) => {
     // Konvertera bild till blob - olika metoder för web vs mobil
     let blob;
 
-    if (imageUri.startsWith("file://")) {
-      // Android: Använd XMLHttpRequest
-      console.log("Using XHR for Android file:// URI");
+    const isWebUri = imageUri.startsWith("blob:") || imageUri.startsWith("http");
+    if (!isWebUri) {
+      // Mobile: Använd XMLHttpRequest för file:// (iOS) och content:// (Android)
+      console.log("Using XHR for mobile URI:", imageUri.substring(0, 20));
       blob = await new Promise((resolve, reject) => {
         const xhr = new XMLHttpRequest();
         xhr.onload = function () {
@@ -36,8 +37,8 @@ const uploadImage = async (imageUri, userId) => {
         xhr.send(null);
       });
     } else {
-      // Web: Standard fetch
-      console.log("Using fetch for web blob:// URI");
+      // Web: Standard fetch för blob:// och http(s):// URIs
+      console.log("Using fetch for web URI:");
       const response = await fetch(imageUri);
       if (!response.ok) {
         throw new Error("Failed to fetch image: " + response.status);
